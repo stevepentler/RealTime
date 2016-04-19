@@ -1,0 +1,28 @@
+{
+  "name": "realtime",
+  "version": "1.0.0",
+  "description": "Websockets",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stevepentler/RealTime.git"
+  },
+  "keywords": [
+    "websockets"
+  ],
+  "author": "steve pentler",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stevepentler/RealTime/issues"
+  },
+  "homepage": "https://github.com/stevepentler/RealTime#readme",
+  "dependencies": {
+    "express": "^4.13.4",
+    "lodash": "^4.11.1",
+    "socket.io": "^1.4.5"
+  }
+}
