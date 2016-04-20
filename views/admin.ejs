@@ -12,8 +12,10 @@
   <h5>Question: <%= survey.question %></h5>
   <h5>Results: </h5>
   <% for (var option in survey.options) { %>
-    <p><%= option + ":" + survey.options[option] %></p>
+    <p><%= option + ": " + survey.options[option] %></p>
   <% } %>
+  <h3><a href='<%= `/${survey.adminId}/${survey.id}`%>'>Admin Link</a></h3>
+  <h3><a href='<%= `/survey/${survey.id}` %>'>Subscriber Link</a></h3>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/js/materialize.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>

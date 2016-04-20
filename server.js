@@ -5,6 +5,7 @@ const express = require('express');
 const generateId = require('./lib/generate-id');
 const bodyParser = require('body-parser');
 const SurveyTracker = require('./lib/survey-tracker');
+const addOptionToForm = require('./lib/add-option');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,6 +15,7 @@ const server = http.createServer(app)
                   });
 
 app.locals.votes = {}
+app.locals.addOption = addOptionToForm();
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -40,11 +42,11 @@ app.post('/', (request, response) => {
   response.render('admin', {survey: newSurvey});
 });
 
-app.get('/survey', function (req, res){
+app.get('/survey/:surveyId', function (req, res){
   res.render('survey');
 });
 
-app.get('/admin/survey', function (req, res){
+app.get('/:adminId/:surveyId', function (req, res){
   res.render('admin');
 });
 
