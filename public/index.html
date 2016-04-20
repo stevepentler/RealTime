@@ -6,9 +6,25 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.2/css/materialize.min.css">
     <link rel="stylesheet" href="/stylesheets/style.css">
   </head>
-  <body>
+  <body class="center">
   <h3>Welcome to Real Time Voting</h3>
-  <div id="connection-count"></div>
+  <h5 id="connection-count"></h5>
+  <h3>Create a Survey</h3>
+  <form>
+    <label>Title</label>
+    <br>
+    <input id="title" type="text-field">
+    <br>
+    <label>First Option</label>
+    <br>
+    <input id="option-1" type="text-field">
+    <br>
+    <label>Second Option</label>
+    <br>
+    <input id="option-2" type="text-field">
+    <br><br>
+    <input id="submit-survey" type="submit" value="Create Survey">
+  </form>
   <!-- <button id="create-poll">Create a Poll</button> -->
 
     <!-- Make sure your JS is at the bottom of the body! -->
