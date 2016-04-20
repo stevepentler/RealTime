@@ -19,8 +19,8 @@ app.get('/', function (req, res){
   res.sendFile(__dirname + '/views/index.html');
 });
 
-app.post('/survey', function (request, response) {
-
+app.post('/', function (request, response) {
+  response.redirect('/admin/survey');
 })
 
 app.get('/survey', function (req, res){
