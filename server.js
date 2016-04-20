@@ -3,6 +3,7 @@
 const http = require('http');
 const express = require('express');
 const generateId = require('./lib/generate-id');
+const bodyParser = require('body-parser');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -14,23 +15,31 @@ const server = http.createServer(app)
 app.locals.votes = {}
 
 app.use(express.static('public'));
+app.set('view engine', 'ejs');
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', function (req, res){
-  res.sendFile(__dirname + '/views/index.html');
+  res.render('index');
 });
 
-app.post('/', function (request, response) {
-  console.log("you hit this");
-  // console.log(request.body.survey);
-  response.redirect('/admin/survey');
-})
+app.post('/survey', (request, response) => {
+  let adminId = generateId(3);
+  let id = generateId(10);
+
+  let surveyData = request.body.survey;
+  let question = surveyData.question
+  let
+  console.log(surveyData);
+
+  response.render('admin');
+});
 
 app.get('/survey', function (req, res){
-  res.sendFile(__dirname + '/views/survey.html');
+  res.render('survey');
 });
 
 app.get('/admin/survey', function (req, res){
-  res.sendFile(__dirname + '/views/admin.html'); //esj downloads results, sweet!
+  res.render('admin');
 });
 
 
