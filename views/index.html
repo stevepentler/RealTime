@@ -35,7 +35,19 @@
     </form>
   </div>
     <button type="button" name="add-option" onClick="addOption()" class="btn">Add Option</button>
-  <!-- <button id="create-poll">Create a Poll</button> -->
+    <br><br>
+    <div class='row'>
+      <div class="col s4 offset-s4">
+        <label for='date-selector'>Optional Expiration Date</label>
+        <input id='date-selector' type="date" class="datepicker">
+      </div>
+      <div class="col s4 offset-s4">
+        <label for='time-selector'>Optional Expiration time</label>
+        <input id='time-selector' type="time" class="datepicker">
+    <button type="button" name="begin-survey" onClick="beginSurvey()" class="btn">Begin Survey</button>
+      </div>
+
+    </div>
 
     <!-- Make sure your JS is at the bottom of the body! -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.js"></script>
