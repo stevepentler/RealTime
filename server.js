@@ -6,6 +6,8 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 
+app.locals.votes = {}
+
 app.use(express.static('public'));
 
 app.get('/', function (req, res){
@@ -38,5 +40,12 @@ io.on('connection', function (socket) {
     console.log('A user has disconnected.', io.engine.clientsCount);
     io.sockets.emit('usersConnected', io.engine.clientsCount);
   });
+
+  socket.on('message', function(channel, message) {
+    if (channel === "castVote") {
+      app.locals.votes[socket.id] = message;
+      console.log(app.local.votes);
+    }
+  })
 });
 module.exports = server;
