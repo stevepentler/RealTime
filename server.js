@@ -23,7 +23,7 @@ app.get('/', function (req, res){
   res.render('index');
 });
 
-app.post('/survey', (request, response) => {
+app.post('/', (request, response) => {
   let adminId = generateId(3);
   let id = generateId(10);
 
@@ -37,7 +37,7 @@ app.post('/survey', (request, response) => {
 
   let newSurvey = new SurveyTracker(id, adminId, question, options);
 
-  response.render('admin');
+  response.render('admin', {survey: newSurvey});
 });
 
 app.get('/survey', function (req, res){
