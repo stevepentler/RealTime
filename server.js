@@ -4,14 +4,14 @@ const http = require('http');
 const express = require('express');
 
 const app = express();
+const port = process.env.PORT || 3000;
 
 app.use(express.static('public'));
 
 app.get('/', function (req, res){
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile(__dirname + '/views/index.html');
 });
 
-const port = process.env.PORT || 3000;
 
 const server = http.createServer(app)
                  .listen(port, function () {
