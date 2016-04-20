@@ -2,6 +2,7 @@
 
 const http = require('http');
 const express = require('express');
+const generateId = require('./lib/generate-id');
 
 const app = express();
 const port = process.env.PORT || 3000;
