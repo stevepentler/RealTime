@@ -11,43 +11,43 @@
     <h5 id="connection-count"></h5>
 
   <div class="row center">
-    <form id="survey-form" class="col s6 offset-s3">
+    <form id="survey-form" method="POST" action="/survey" class="col s6 offset-s3">
       <div class="row">
         <div class="input-field">
           <label for="title">Title</label>
           <input id="title" type="text" class="validate">
         </div>
       </div>
-      <div class="row">
-        <div class="input-field">
-          <label for="option-1">Option 1</label>
-          <input id="option-1" type="text" class="validate">
+      <div class="options-list">
+        <div class="row">
+          <div class="input-field">
+            <label for="option-1">Option 1</label>
+            <input id="option-1" type="text" class="validate">
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field">
+            <label for="option-2">Option 2</label>
+            <input id="option-2" type="text" class="validate">
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="input-field">
-          <label for="option-2">Option 2</label>
-          <input id="option-2" type="text" class="validate">
+      <button type="button" name="add-option" onClick="addOption()" class="btn">Add Option</button>
+      <br><br>
+      <div class='row'>
+        <div>
+          <label for='date-selector'>Optional Expiration Date</label>
+          <input id='date-selector' type="date" class="datepicker">
         </div>
-      </div>
-      <div>
+        <div>
+          <label for='time-selector'>Optional Expiration time</label>
+          <input id='time-selector' type="time" class="datepicker">
+      <button type="submit" name="begin-survey" onClick="beginSurvey()" class="btn">Begin Survey</button>
+        </div>
+
       </div>
     </form>
   </div>
-    <button type="button" name="add-option" onClick="addOption()" class="btn">Add Option</button>
-    <br><br>
-    <div class='row'>
-      <div class="col s4 offset-s4">
-        <label for='date-selector'>Optional Expiration Date</label>
-        <input id='date-selector' type="date" class="datepicker">
-      </div>
-      <div class="col s4 offset-s4">
-        <label for='time-selector'>Optional Expiration time</label>
-        <input id='time-selector' type="time" class="datepicker">
-    <button type="button" name="begin-survey" onClick="beginSurvey()" class="btn">Begin Survey</button>
-      </div>
-
-    </div>
 
     <!-- Make sure your JS is at the bottom of the body! -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.js"></script>
@@ -61,7 +61,7 @@
   "use strict";
   let optionCounter = 3;
   function addOption() {
-    $('#survey-form').append(
+    $('.options-list').append(
       `<div class="row">
         <div class="input-field">
           <label for="option-${optionCounter}">Option ${optionCounter}</label>
