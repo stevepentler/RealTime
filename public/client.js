@@ -11,6 +11,6 @@ socket.on('usersConnected', function (count) {
 
 for (let i = 0; i < options.length; i++) {
   options[i].addEventListener('click', function() {
-    socket.send('voteCast', this.innerText);
+    socket.send('voteCast', {vote: this.innerText});
   });
 }
