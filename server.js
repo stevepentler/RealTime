@@ -28,8 +28,11 @@ app.post('/survey', (request, response) => {
 
   let surveyData = request.body.survey;
   let question = surveyData.question
-  let
-  console.log(surveyData);
+  let options = {}
+
+  surveyData.options.forEach(function(singleOption) {
+    options[singleOption] = 0;
+  })
 
   response.render('admin');
 });
