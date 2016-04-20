@@ -12,6 +12,10 @@ app.get('/', function (req, res){
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get('/survey', function (req, res){
+  res.sendFile(__dirname + '/views/survey.html');
+});
+
 
 const server = http.createServer(app)
                  .listen(port, function () {
