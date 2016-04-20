@@ -5,6 +5,10 @@ const express = require('express');
 
 const app = express();
 const port = process.env.PORT || 3000;
+const server = http.createServer(app)
+                 .listen(port, function () {
+                    console.log('Listening on port ' + port + '.');
+                  });
 
 app.locals.votes = {}
 
@@ -19,14 +23,10 @@ app.get('/survey', function (req, res){
 });
 
 app.get('/admin/survey', function (req, res){
-  res.sendFile(__dirname + '/views/admin.html');
+  res.sendFile(__dirname + '/views/admin.html'); //esj downloads results, sweet!
 });
 
 
-const server = http.createServer(app)
-                 .listen(port, function () {
-                    console.log('Listening on port ' + port + '.');
-                  });
 
 const socketIo = require('socket.io');
 const io = socketIo(server);
@@ -37,9 +37,8 @@ io.on('connection', function (socket) {
   io.sockets.emit('usersConnected', io.engine.clientsCount);
 
   socket.on('message', function (channel, message) {
-    let voteMessage = message.vote;
     if (channel === "voteCast") {
-      app.locals.votes[socket.id] = voteMessage;
+      app.locals.votes[socket.id] = message.vote
       console.log(app.locals.votes);
     }
   })
