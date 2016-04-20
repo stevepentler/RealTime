@@ -20,7 +20,6 @@ app.get('/', function (req, res){
 });
 
 app.post('/', function (request, response) {
-  let title = request.body.title
   console.log("you hit this");
   response.redirect('/admin/survey');
 })
