@@ -4,6 +4,7 @@ const http = require('http');
 const express = require('express');
 const generateId = require('./lib/generate-id');
 const bodyParser = require('body-parser');
+const SurveyTracker = require('./lib/survey-tracker');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -33,6 +34,8 @@ app.post('/survey', (request, response) => {
   surveyData.options.forEach(function(singleOption) {
     options[singleOption] = 0;
   })
+
+  let newSurvey = new SurveyTracker(id, adminId, question, options);
 
   response.render('admin');
 });
