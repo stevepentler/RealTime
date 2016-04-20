@@ -21,6 +21,7 @@ app.get('/', function (req, res){
 
 app.post('/', function (request, response) {
   console.log("you hit this");
+  // console.log(request.body.survey);
   response.redirect('/admin/survey');
 })
 

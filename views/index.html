@@ -11,24 +11,24 @@
     <h5 id="connection-count"></h5>
 
   <div class="row center">
-    <form id="survey-form" method="POST" action="/" name='survey' class="col s6 offset-s3">
+    <form id="survey-form" method="POST" name='survey' class="col s6 offset-s3">
       <div class="row">
         <div class="input-field">
-          <label for="question">Question</label>
-          <input id="question" type="text" class="validate">
+          <label for="survey[question]">Question</label>
+          <input id="survey[question]" type="text" class="validate">
         </div>
       </div>
       <div class="options-list">
         <div class="row">
           <div class="input-field">
-            <label for="option-1">Option 1</label>
-            <input id="option-1" type="text" class="validate">
+            <label for="survey[option-1]">Option 1</label>
+            <input id="survey[option-1]" type="text" class="validate">
           </div>
         </div>
         <div class="row">
           <div class="input-field">
-            <label for="option-2">Option 2</label>
-            <input id="option-2" type="text" class="validate">
+            <label for="suvey[option-2]">Option 2</label>
+            <input id="survey[option-2]" type="text" class="validate">
           </div>
         </div>
       </div>
@@ -36,13 +36,13 @@
       <br><br>
       <div class='row'>
         <div>
-          <label for='date-selector'>Optional Expiration Date</label>
-          <input id='date-selector' type="date" class="datepicker">
+          <label for='survey[date-selector]'>Optional Expiration Date</label>
+          <input id='survey[date-selector]' type="date" class="datepicker">
         </div>
         <div>
-          <label for='time-selector'>Optional Expiration time</label>
-          <input id='time-selector' type="time" class="datepicker">
-      <button type="submit" name="begin-survey" onClick="beginSurvey()" class="btn">Begin Survey</button>
+          <label for='survey[time-selector]'>Optional Expiration time</label>
+          <input id='survey[time-selector]' type="time" class="datepicker">
+      <button type="submit" name="begin-survey" class="btn">Begin Survey</button> <!--onClick="beginSurvey()"-->
         </div>
 
       </div>
