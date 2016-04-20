@@ -11,7 +11,7 @@
     <h5 id="connection-count"></h5>
 
   <div class="row center">
-    <form class="col s6 offset-s3">
+    <form id="survey-form" class="col s6 offset-s3">
       <div class="row">
         <div class="input-field">
           <label for="title">Title</label>
@@ -31,10 +31,10 @@
         </div>
       </div>
       <div>
-          <button type="button" name="add-option" onClick="addOption()" class="btn">Add Option</button>
       </div>
     </form>
   </div>
+    <button type="button" name="add-option" onClick="addOption()" class="btn">Add Option</button>
   <!-- <button id="create-poll">Create a Poll</button> -->
 
     <!-- Make sure your JS is at the bottom of the body! -->
@@ -44,3 +44,19 @@
     <script src="/client.js"></script>
   </body>
 </html>
+
+<script type="text/javascript">
+  "use strict";
+  let optionCounter = 3;
+  function addOption() {
+    $('#survey-form').append(
+      `<div class="row">
+        <div class="input-field">
+          <label for="option-${optionCounter}">Option ${optionCounter}</label>
+          <input id="option-${optionCounter}" type="text" class="validate">
+        </div>
+      </div>`
+    )
+  optionCounter += 1;
+  }
+</script>
