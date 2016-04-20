@@ -13,7 +13,8 @@ const server = http.createServer(app)
                     console.log('Listening on port ' + port + '.');
                   });
 
-app.locals.votes = {}
+app.locals.surveys = {};
+app.locals.votes = {};
 
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
@@ -23,7 +24,7 @@ app.get('/', function (req, res){
   res.render('index');
 });
 
-app.post('/', (request, response) => {
+app.post('/admin', (request, response) => {
   let adminId = generateId(3);
   let id = generateId(10);
 
@@ -36,16 +37,20 @@ app.post('/', (request, response) => {
   })
 
   let newSurvey = new SurveyTracker(id, adminId, question, options);
+  app.locals.surveys[newSurvey.id] = newSurvey;
 
   response.render('admin', {survey: newSurvey});
 });
 
 app.get('/survey/:surveyId', function (req, res){
-  res.render('survey');
+  var survey = app.locals.surveys[req.params.surveyId];
+  res.render('survey', {survey: survey});
 });
 
 app.get('/:adminId/:surveyId', function (req, res){
-  res.render('admin');
+  console.log("params", req.params.surveyId)
+  var existingSurvey = app.locals.surveys[req.params.surveyId];
+  res.render('admin', {survey: existingSurvey});
 });
 
 
