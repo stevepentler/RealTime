@@ -43,9 +43,14 @@ app.post('/admin', (request, response) => {
   response.render('admin', {survey: newSurvey});
 });
 
-app.get('/survey/:surveyId', function (req, res){
+app.get('/survey/results/:surveyId', function (req, res){
   var survey = app.locals.surveys[req.params.surveyId];
-  res.render('survey', {survey: survey});
+  res.render('survey-results', {survey: survey});
+});
+
+app.get('/survey/hideresults/:surveyId', function (req, res){
+  var survey = app.locals.surveys[req.params.surveyId];
+  res.render('survey-results', {survey: survey});
 });
 
 app.get('/:adminId/:surveyId', function (req, res){
