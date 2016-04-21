@@ -2,10 +2,10 @@
 
 const socket = io();
 
-let connectionCount = document.getElementById('connection-count');
-let options = document.querySelectorAll('.options button')
+let connectionCount = ('#connection-count');
+let options = $('.options button')
 let surveyId = window.location.pathname.split("/").slice(-1).toString();
-// let userVote = document.querySelectorAll('.userVote');
+let userVoted = $('#userVoted');
 
 socket.on('usersConnected', function (count) {
 });
@@ -20,9 +20,10 @@ socket.on(`voteCount-${surveyId}`, function(tally) {
 
 for (let i = 0; i < options.length; i++) {
   options[i].addEventListener('click', function() {
+    userVoted.innerHTML = `You voted for: ${this.innerText}!`;
+    options.remove();
     socket.send(`voteCast-${surveyId}`, {vote: this.innerText,
                                          surveyId: surveyId});
-    // userVote.innerText = `You voted for: ${this.innerText}!`;
   });
 }
 
