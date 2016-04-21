@@ -70,8 +70,13 @@ io.on('connection', function (socket) {
   io.sockets.emit('usersConnected', io.engine.clientsCount);
 
   socket.on('message', function (channel, message) {
-    console.log(message);
-    if (channel === "voteCast") {
+    let surveyId = message.surveyId;
+    let survey = app.locals.surveys[surveyId];
+
+    if (channel === `voteCast-${surveyId}`) {
+      console.log("survey options before", survey.options)
+      survey.options[message.vote]++
+      console.log("survey options after", survey.options)
       app.locals.votes[socket.id] = message.vote
       console.log("apps.locals.votes", app.locals.votes)
     }

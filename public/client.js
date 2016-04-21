@@ -5,15 +5,16 @@ const socket = io();
 let connectionCount = document.getElementById('connection-count');
 let options = document.querySelectorAll('.options button')
 let surveyId = window.location.pathname.split("/").slice(-1).toString();
-let userVote = document.querySelectorAll('.userVote');
+// let userVote = document.querySelectorAll('.userVote');
 
 socket.on('usersConnected', function (count) {
 });
 
 for (let i = 0; i < options.length; i++) {
   options[i].addEventListener('click', function() {
-    socket.send('voteCast', {vote: this.innerText});
-    userVote.innerText = `You voted for: ${this.innerText}!`;
+    socket.send(`voteCast-${surveyId}`, {vote: this.innerText,
+                                         surveyId: surveyId});
+    // userVote.innerText = `You voted for: ${this.innerText}!`;
   });
 }
 
