@@ -40,7 +40,7 @@ app.post('/admin', (request, response) => {
   let newSurvey = new SurveyTracker(id, adminId, question, options);
   app.locals.surveys[newSurvey.id] = newSurvey;
 
-  response.render('admin', {survey: newSurvey});
+  response.render('admin-links', {survey: newSurvey});
 });
 
 app.get('/survey/results/:surveyId', function (req, res){
@@ -56,7 +56,7 @@ app.get('/survey/hideresults/:surveyId', function (req, res){
 app.get('/:adminId/:surveyId', function (req, res){
   console.log("params", req.params.surveyId)
   var existingSurvey = app.locals.surveys[req.params.surveyId];
-  res.render('admin', {survey: existingSurvey});
+  res.render('admin-results', {survey: existingSurvey});
 });
 
 
