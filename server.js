@@ -5,7 +5,6 @@ const express = require('express');
 const generateId = require('./lib/generate-id');
 const bodyParser = require('body-parser');
 const SurveyTracker = require('./lib/survey-tracker');
-const _ = require('lodash');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -72,13 +71,16 @@ io.on('connection', function (socket) {
   socket.on('message', function (channel, message) {
     let surveyId = message.surveyId;
     let survey = app.locals.surveys[surveyId];
+    let userVote = message.vote;
+    let tally = survey.options;
 
     if (channel === `voteCast-${surveyId}`) {
-      console.log("survey options before", survey.options)
-      survey.options[message.vote]++
-      console.log("survey options after", survey.options)
+      console.log("survey options before", tally)
+      tally[userVote]++
+      console.log("survey options after", tally)
       app.locals.votes[socket.id] = message.vote
       console.log("apps.locals.votes", app.locals.votes)
+      io.sockets.emit(`voteCount-${surveyId}`, tally)
     }
   })
 
@@ -95,11 +97,5 @@ function countVoters() {
   console.log("voter count", voterCount)
   return voterCount;
 };
-
-function countVotes() {
-  let result = _.mapValues(app.locals.votes, function(key, value) { return key })
-  console.log("result", result)
-  return result;
-}
 
 module.exports = server;
