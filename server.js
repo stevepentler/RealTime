@@ -6,6 +6,7 @@ const generateId = require('./lib/generate-id');
 const bodyParser = require('body-parser');
 const SurveyTracker = require('./lib/survey-tracker');
 const $ = require('jquery');
+
 const app = express();
 const port = process.env.PORT || 3000;
 const server = http.createServer(app)

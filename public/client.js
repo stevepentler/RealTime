@@ -20,8 +20,8 @@ socket.on(`voteCount-${surveyId}`, function(tally) {
 
 for (let i = 0; i < options.length; i++) {
   options[i].addEventListener('click', function() {
-    userVoted.innerHTML = `You voted for: ${this.innerText}!`;
     options.remove();
+    userVoted.text(`You voted for: ${this.innerText}!`);
     socket.send(`voteCast-${surveyId}`, {vote: this.innerText,
                                          surveyId: surveyId});
   });
