@@ -8,12 +8,13 @@
   </head>
   <body class="center">
     <h3>Survey</h3>
+    <h4>Question<h4>
+    <h5> <%= survey.question %></h5>
     <h5 id="connection-count"></h5>
     <div id="options">
-    <% for (var option in survey.options) { %>
-      <button><%= option %></button>
-    <% } %>
-
+      <% for (var option in survey.options) { %>
+        <button><%= option %></button>
+      <% } %>
     </div>
 
     <!-- Make sure your JS is at the bottom of the body! -->

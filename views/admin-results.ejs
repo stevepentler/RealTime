@@ -12,9 +12,11 @@
     <h4>Question<h4>
     <h5> <%= survey.question %></h5>
     <h4>Results: </h4>
-    <% for (var option in survey.options) { %>
-      <h5><%= option + ": " + survey.options[option] %></h5>
-    <% } %>
+    <div class="results">
+      <% for (var option in survey.options) { %>
+        <h5><%= option + ": " + survey.options[option] %></h5>
+      <% } %>
+    </div>
     <h3><a href='<%= `/${survey.adminId}/${survey.id}`%>'>Admin Link</a></h3>
     <h3><a href='<%= `/survey/results/${survey.id}` %>'>Subscriber Link: Public Results</a></h3>
     <h3><a href='<%= `/survey/hideresults/${survey.id}` %>'>Subscriber Link: Private Results</a></h3>
