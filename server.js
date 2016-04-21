@@ -5,6 +5,7 @@ const express = require('express');
 const generateId = require('./lib/generate-id');
 const bodyParser = require('body-parser');
 const SurveyTracker = require('./lib/survey-tracker');
+const _ = require('lodash');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -67,7 +68,7 @@ io.on('connection', function (socket) {
     console.log(message);
     if (channel === "voteCast") {
       app.locals.votes[socket.id] = message.vote
-      console.log(app.locals.votes);
+      console.log("apps.locals.votes", app.locals.votes)
     }
   })
 
@@ -77,4 +78,18 @@ io.on('connection', function (socket) {
   });
 
 });
+
+function countVoters() {
+  let sockets = Object.keys(app.locals.votes);
+  let voterCount = sockets.length
+  console.log("voter count", voterCount)
+  return voterCount;
+};
+
+function countVotes() {
+  let result = _.mapValues(app.locals.votes, function(key, value) { return key })
+  console.log("result", result)
+  return result;
+}
+
 module.exports = server;

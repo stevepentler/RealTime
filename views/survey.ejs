@@ -10,9 +10,10 @@
     <h3>Survey</h3>
     <h5 id="connection-count"></h5>
     <div id="options">
-      <button>Option 1</button>
-      <button>Option 2</button>
-      <button>Option 3</button>
+    <% for (var option in survey.options) { %>
+      <button><%= option %></button>
+    <% } %>
+
     </div>
 
     <!-- Make sure your JS is at the bottom of the body! -->
