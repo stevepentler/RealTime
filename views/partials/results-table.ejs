@@ -1,0 +1,22 @@
+<div class="container">
+  <table class="striped centered">
+    <thead>
+      <tr>
+          <th>Option</th>
+          <th>Votes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% var i = 1 %>
+      <% for (var option in survey.options) {%>
+        <% if (survey.options.hasOwnProperty(option)) {%>
+          <tr>
+            <td><%= option %></td>
+            <td id="<%= survey.id %>-<%= i %>"><%= survey.options[option] %></td>
+          <% i++ %>
+        <% } %>
+      <% } %>
+          </tr>
+    </tbody>
+  </table>
+</div>

@@ -9,11 +9,7 @@
     <h5> <%= survey.question %></h5>
     <h5 id="connection-count"></h5>
     <h3 id="userVoted"></h3>
-    <div class="options">
-      <% for (var option in survey.options) { %>
-        <button><%= option %></button>
-      <% } %>
-    </div>
+    <% include ./partials/options %>
 
     <% include ./partials/scripts %>
   </body>

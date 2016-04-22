@@ -79,9 +79,9 @@ io.on('connection', function (socket) {
       console.log("survey options before", tally)
       tally[userVote]++
       console.log("survey options after", tally)
+      io.sockets.emit(`voteCount-${surveyId}`, tally);
       app.locals.votes[socket.id] = message.vote
       console.log("apps.locals.votes", app.locals.votes)
-      io.sockets.emit(`voteCount-${surveyId}`, tally)
     }
   })
 
