@@ -9,6 +9,7 @@
     <h4>Question<h4>
     <h5> <%= survey.question %></h5>
     <h4>Results: </h4>
+    <h3 id="inactive-survey"></h3>
     <% include ./partials/results-table %>
 
     <h3><a href='<%= `/${survey.adminId}/${survey.id}`%>'>Admin Link</a></h3>

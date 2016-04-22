@@ -6,6 +6,8 @@ let connectionCount = ('#connection-count');
 let options = $('.options button')
 let surveyId = window.location.pathname.split("/").slice(-1).toString();
 let userVoted = $('#userVoted');
+let inactiveSurvey = $('#inactive-survey');
+
 
 socket.on('usersConnected', function (count) {
 });
@@ -28,13 +30,11 @@ for (let i = 0; i < options.length; i++) {
   });
 }
 
-// $('#close-survey').on('click', function() {
-//   endUserOptions();
-// })
+$('#close-survey').on('click', function() {
+  socket.send(`closeSurvey-${surveyId}`, {surveyId: surveyId});
+})
 
-
-// function endUserOptions() {
-//   console.log("hit user options");
-//   console.log($options.html("sdfjsdlkfjslkdjflas;kdjflas;kdfjsalk;dfj"));
-//   $('.options').html("<div class='expired'>This survey has ended!</div>")
-// }
+socket.on(`closeSurvey-${surveyId}`, function() {
+  options.remove();
+  inactiveSurvey.text("This survey has been closed!")
+})

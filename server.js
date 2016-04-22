@@ -83,6 +83,10 @@ io.on('connection', function (socket) {
       app.locals.votes[socket.id] = message.vote
       console.log("apps.locals.votes", app.locals.votes)
     }
+
+    else if (channel === `closeSurvey-${surveyId}`) {
+      io.sockets.emit(`closeSurvey-${surveyId}`);
+    }
   })
 
   socket.on('disconnect', function () {
