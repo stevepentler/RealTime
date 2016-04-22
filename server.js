@@ -31,16 +31,19 @@ app.post('/admin', (request, response) => {
 
   let surveyData = request.body.survey;
   let question = surveyData.question;
+  let timeSelector = (surveyData.time * 60);
   let options = {};
 
   surveyData.options.forEach(function(singleOption) {
     options[singleOption] = 0;
   })
 
-  let newSurvey = new SurveyTracker(id, adminId, question, options);
+  let newSurvey = new SurveyTracker(id, adminId, question, options, timeSelector);
   app.locals.surveys[newSurvey.id] = newSurvey;
 
   response.render('admin-links', {survey: newSurvey});
+
+  startTimer(timeSelector, id);
 });
 
 app.get('/survey/results/:surveyId', function (req, res){
@@ -98,5 +101,18 @@ io.on('connection', function (socket) {
   });
 
 });
+
+function startTimer(timeSelector, id) {
+  let timeRemaining = timeSelector;
+  let surveyId = id;
+  let interval = setInterval( function() {
+    console.log("timeselector", timeRemaining)
+    timeRemaining--
+    if (timeRemaining === 0) {
+      io.sockets.emit(`closeSurvey-${surveyId}`);
+      clearInterval(interval);
+    }
+  }, 1000);
+};
 
 module.exports = server;
