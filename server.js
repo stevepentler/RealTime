@@ -66,7 +66,7 @@ const io = socketIo(server);
 io.on('connection', function (socket) {
   console.log('A user has connected.', io.engine.clientsCount);
 
-  io.sockets.emit('usersConnected', io.engine.clientsCount);
+  io.sockets.emit('userConnection', io.engine.clientsCount);
 
   socket.on('message', function (channel, message) {
     let surveyId = message.surveyId;
@@ -85,6 +85,10 @@ io.on('connection', function (socket) {
 
     else if (channel === `closeSurvey-${surveyId}`) {
       io.sockets.emit(`closeSurvey-${surveyId}`);
+    }
+
+    else if (channel === `activeUser-${surveyId}`) {
+      io.sockets.emit(`activeUser`)
     }
   })
 

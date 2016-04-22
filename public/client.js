@@ -2,14 +2,15 @@
 
 const socket = io();
 
-let connectionCount = ('#connection-count');
+let connectionCount = $('#connection-count');
 let options = $('.options button')
 let surveyId = window.location.pathname.split("/").slice(-1).toString();
 let userVoted = $('#userVoted');
 let inactiveSurvey = $('#inactive-survey');
 
 
-socket.on('usersConnected', function (count) {
+socket.on('userConnection', function (count) {
+  connectionCount.text(`Friends Active: ${count}`);
 });
 
 socket.on(`voteCount-${surveyId}`, function(tally) {
