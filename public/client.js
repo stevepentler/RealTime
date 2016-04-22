@@ -15,7 +15,6 @@ socket.on(`voteCount-${surveyId}`, function(tally) {
   let i = 1;
   for (var option in tally) {
     $(`#${surveyId}-${i}`).text(`${tally[option]}`)
-    debugger
     i++;
   }
 })

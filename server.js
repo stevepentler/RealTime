@@ -51,7 +51,7 @@ app.get('/survey/results/:surveyId', function (req, res){
 
 app.get('/survey/hideresults/:surveyId', function (req, res){
   var survey = app.locals.surveys[req.params.surveyId];
-  res.render('survey-results', {survey: survey});
+  res.render('survey-hide-results', {survey: survey});
 });
 
 app.get('/:adminId/:surveyId', function (req, res){
@@ -91,12 +91,5 @@ io.on('connection', function (socket) {
   });
 
 });
-
-function countVoters() {
-  let sockets = Object.keys(app.locals.votes);
-  let voterCount = sockets.length
-  console.log("voter count", voterCount)
-  return voterCount;
-};
 
 module.exports = server;
