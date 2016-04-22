@@ -32,13 +32,12 @@ app.post('/admin', (request, response) => {
   let surveyData = request.body.survey;
   let question = surveyData.question;
   let options = {};
-  let active = true;
 
   surveyData.options.forEach(function(singleOption) {
     options[singleOption] = 0;
   })
 
-  let newSurvey = new SurveyTracker(id, adminId, question, options, active);
+  let newSurvey = new SurveyTracker(id, adminId, question, options);
   app.locals.surveys[newSurvey.id] = newSurvey;
 
   response.render('admin-links', {survey: newSurvey});

@@ -50,20 +50,6 @@
     </body>
   </main>
 
-  <script type="text/javascript">
-    "use strict";
-    let optionCounter = 3;
-    function addOption() {
-      $('.options-list').append(
-          `<div class="row">
-            <div class="input-field">
-              <label for="survey[options][]">Option ${optionCounter}</label>
-              <input name="survey[options][]" type="text">
-            </div>
-          </div>`
-      )
-    optionCounter += 1;
-    }
-  </script>
+  <% include ./partials/add-option %>
 
 </html>
