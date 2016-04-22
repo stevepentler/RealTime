@@ -15,6 +15,7 @@ socket.on(`voteCount-${surveyId}`, function(tally) {
   let i = 1;
   for (var option in tally) {
     i++;
+    $(`#${surveyId}-${i}`).text(`${survey.options[option]}`)
   }
 })
 
