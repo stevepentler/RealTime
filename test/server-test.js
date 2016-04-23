@@ -43,7 +43,7 @@ describe('Server', () => {
     });
 
     xit('should have a body with the name of the application', (done) => {
-      var title = app.locals.title;
+      // var title = app.locals.title;
 
       this.request.get('/', (error, response) => {
         if (error) { done(error); }
@@ -67,7 +67,7 @@ describe('Server', () => {
       });
     });
 
-    xit('should receive a survey and store it', (done) => {
+    it('should receive a survey and store it', (done) => {
       app.locals.surveys = {};
       this.request.post('/admin', { form: surveyData }, (error, response) => {
         if (error) { done(error); }

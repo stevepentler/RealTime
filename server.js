@@ -42,7 +42,7 @@ app.get('/:adminId/:surveyId', function (req, res){
 
 
 io.on('connection', function (socket) {
-  io.sockets.emit('userConnection', io.engine.clientsCount);
+  io.sockets.emit('userConnection', io.engine.clientsCount - 1);
 
   socket.on('message', function (channel, message) {
     handleMessage(channel, message, io, app);
