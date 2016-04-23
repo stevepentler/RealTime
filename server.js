@@ -6,6 +6,7 @@ const generateId = require('./lib/generate-id');
 const bodyParser = require('body-parser');
 const sendText = require('./lib/twilio');
 const SurveyTracker = require('./lib/survey-tracker');
+const startTimer = require('./lib/timer');
 const $ = require('jquery');
 
 const app = express();
@@ -14,6 +15,8 @@ const server = http.createServer(app)
                  .listen(port, function () {
                     console.log('Listening on port ' + port + '.');
                   });
+const socketIo = require('socket.io');
+const io = socketIo(server);
 
 app.locals.surveys = {};
 app.locals.votes = {};
@@ -44,7 +47,7 @@ app.post('/admin', (request, response) => {
 
   response.render('admin-links', {survey: newSurvey});
 
-  startTimer(timeSelector, id);
+  startTimer(timeSelector, id, io);
 });
 
 app.get('/survey/results/:surveyId', function (req, res){
@@ -60,8 +63,7 @@ app.get('/:adminId/:surveyId', function (req, res){
 });
 
 
-const socketIo = require('socket.io');
-const io = socketIo(server);
+
 
 io.on('connection', function (socket) {
   console.log('A user has connected.', io.engine.clientsCount);
@@ -96,21 +98,6 @@ io.on('connection', function (socket) {
   });
 
 });
-
-function startTimer(timeSelector, id) {
-  let timeRemaining = timeSelector;
-  let surveyId = id;
-  let interval = setInterval( function() {
-    console.log("timeselector", timeRemaining)
-    timeRemaining--
-    if (timeRemaining === 0) {
-      io.sockets.emit(`closeSurvey-${surveyId}`);
-      clearInterval(interval);
-    } else if (timeRemaining < 0) {
-      clearInterval(interval);
-    }
-  }, 1000);
-};
 
 function getSurveyId (req) {
   return app.locals.surveys[req.params.surveyId];
