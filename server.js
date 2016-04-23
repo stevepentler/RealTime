@@ -48,19 +48,15 @@ app.post('/admin', (request, response) => {
 });
 
 app.get('/survey/results/:surveyId', function (req, res){
-  var survey = app.locals.surveys[req.params.surveyId];
-  res.render('survey-results', {survey: survey});
+  res.render('survey-results', {survey: getSurveyId(req)});
 });
 
 app.get('/survey/hideresults/:surveyId', function (req, res){
-  var survey = app.locals.surveys[req.params.surveyId];
-  res.render('survey-hide-results', {survey: survey});
+  res.render('survey-hide-results', {survey: getSurveyId(req)});
 });
 
 app.get('/:adminId/:surveyId', function (req, res){
-  console.log("params", req.params.surveyId)
-  var existingSurvey = app.locals.surveys[req.params.surveyId];
-  res.render('admin-results', {survey: existingSurvey});
+  res.render('admin-results', {survey: getSurveyId(req)});
 });
 
 
@@ -79,12 +75,9 @@ io.on('connection', function (socket) {
     let tally = survey.options;
 
     if (channel === `voteCast-${surveyId}`) {
-      console.log("survey options before", tally)
       tally[userVote]++
-      console.log("survey options after", tally)
       io.sockets.emit(`voteCount-${surveyId}`, tally);
       app.locals.votes[socket.id] = message.vote
-      console.log("apps.locals.votes", app.locals.votes)
     }
 
     else if (channel === `closeSurvey-${surveyId}`) {
@@ -99,7 +92,6 @@ io.on('connection', function (socket) {
   })
 
   socket.on('disconnect', function () {
-    console.log('A user has disconnected.', io.engine.clientsCount);
     io.sockets.emit('usersConnected', io.engine.clientsCount);
   });
 
@@ -114,10 +106,15 @@ function startTimer(timeSelector, id) {
     if (timeRemaining === 0) {
       io.sockets.emit(`closeSurvey-${surveyId}`);
       clearInterval(interval);
+    } else if (timeRemaining < 0) {
+      clearInterval(interval);
     }
   }, 1000);
 };
 
+function getSurveyId (req) {
+  return app.locals.surveys[req.params.surveyId];
+};
 
 
 module.exports = server;
