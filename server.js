@@ -19,25 +19,25 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/', function (req, res){
-  res.render('index');
+  res.render('pages/index');
 });
 
 app.post('/admin', function (req, res) {
   let newSurvey = generateSurvey(req, io);
   app.locals.surveys[newSurvey.id] = newSurvey;
-  res.render('admin-links', {survey: newSurvey});
+  res.render('pages/admin-links', {survey: newSurvey});
 });
 
 app.get('/survey/results/:surveyId', function (req, res){
-  res.render('survey-results', {survey: getSurveyId(req)});
+  res.render('pages/survey-results', {survey: getSurveyId(req)});
 });
 
 app.get('/survey/hideresults/:surveyId', function (req, res){
-  res.render('survey-hide-results', {survey: getSurveyId(req)});
+  res.render('pages/survey-hide-results', {survey: getSurveyId(req)});
 });
 
 app.get('/:adminId/:surveyId', function (req, res){
-  res.render('admin-results', {survey: getSurveyId(req)});
+  res.render('pages/admin-results', {survey: getSurveyId(req)});
 });
 
 

@@ -1,22 +1,18 @@
 <!doctype html>
 <html>
   <head>
-    <% include ./partials/head %>
+    <% include ../partials/head %>
   </head>
   <body class="center">
-    <h3>Live Results</h3>
+    <h3>Survey Created!</h3>
     <h5 id="connection-count"></h5>
-    <h4>Question<h4>
-    <h5> <%= survey.question %></h5>
-    <h4>Results: </h4>
+    <h5>Question: <%= survey.question %></h5>
     <h3 id="inactive-survey"></h3>
-    <% include ./partials/results-table %>
 
     <h3><a href='<%= `/${survey.adminId}/${survey.id}`%>'>Admin Link</a></h3>
     <h3><a href='<%= `/survey/results/${survey.id}` %>'>Subscriber Link: Public Results</a></h3>
     <h3><a href='<%= `/survey/hideresults/${survey.id}` %>'>Subscriber Link: Private Results</a></h3>
-    <button id="close-survey" type="button" class="btn">Close Survey</button>
 
-    <% include ./partials/scripts %>
+    <% include ../partials/scripts %>
   </body>
 </html>

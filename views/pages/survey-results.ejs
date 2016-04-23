@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <% include ./partials/head %>
+    <% include ../partials/head %>
   </head>
   <body class="center">
     <h3>Survey</h3>
@@ -10,11 +10,11 @@
     <h5> <%= survey.question %></h5>
     <h3 id="inactive-survey"></h3>
     <h3 id="userVoted"></h3>
-    <% include ./partials/options %>
+    <% include ../partials/options %>
 
     <h4>Results: </h4>
-    <% include ./partials/results-table %>
+    <% include ../partials/results-table %>
 
-    <% include ./partials/scripts %>
+    <% include ../partials/scripts %>
   </body>
 </html>
