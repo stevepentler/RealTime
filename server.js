@@ -5,7 +5,7 @@ const express = require('express');
 const generateSurvey = require('./lib/generate-survey');
 const bodyParser = require('body-parser');
 const handleMessage = require('./lib/handle-message');
-const $ = require('jquery');
+// const $ = require('jquery');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -52,7 +52,6 @@ io.on('connection', function (socket) {
   socket.on('disconnect', function () {
     io.sockets.emit('usersConnected', io.engine.clientsCount);
   });
-
 });
 
 function getSurveyId (req) {
