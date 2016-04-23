@@ -4,6 +4,7 @@ const http = require('http');
 const express = require('express');
 const generateId = require('./lib/generate-id');
 const bodyParser = require('body-parser');
+const sendText = require('./lib/twilio');
 const SurveyTracker = require('./lib/survey-tracker');
 const $ = require('jquery');
 
@@ -87,6 +88,8 @@ io.on('connection', function (socket) {
     }
 
     else if (channel === `closeSurvey-${surveyId}`) {
+      let results = JSON.stringify(tally);
+      sendText(results);
       io.sockets.emit(`closeSurvey-${surveyId}`);
     }
 
