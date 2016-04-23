@@ -8,7 +8,6 @@ let surveyId = window.location.pathname.split("/").slice(-1).toString();
 let userVoted = $('#userVoted');
 let inactiveSurvey = $('#inactive-survey');
 
-
 socket.on('userConnection', function (count) {
   connectionCount.text(`Friends Active: ${count}`);
 });
@@ -37,5 +36,5 @@ $('#close-survey').on('click', function() {
 
 socket.on(`closeSurvey-${surveyId}`, function() {
   options.remove();
-  inactiveSurvey.text("This survey has been closed!")
+  inactiveSurvey.text("This survey has closed!")
 })
