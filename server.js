@@ -2,10 +2,9 @@
 
 const http = require('http');
 const express = require('express');
-const generateId = require('./lib/generate-id');
+const generateSurvey = require('./lib/generate-survey');
 const bodyParser = require('body-parser');
 const sendText = require('./lib/twilio');
-const SurveyTracker = require('./lib/survey-tracker');
 const startTimer = require('./lib/timer');
 const $ = require('jquery');
 
@@ -29,24 +28,10 @@ app.get('/', function (req, res){
   res.render('index');
 });
 
-app.post('/admin', (request, response) => {
-  let adminId = generateId(3);
-  let id = generateId(10);
-
-  let surveyData = request.body.survey;
-  let question = surveyData.question;
-  let timeSelector = (surveyData.time * 60);
-  let options = {};
-
-  surveyData.options.forEach(function(singleOption) {
-    options[singleOption] = 0;
-  })
-
-  let newSurvey = new SurveyTracker(id, adminId, question, options, timeSelector);
+app.post('/admin', function (req, res) {
+  let newSurvey = generateSurvey(req);
   app.locals.surveys[newSurvey.id] = newSurvey;
-
-  response.render('admin-links', {survey: newSurvey});
-
+  res.render('admin-links', {survey: newSurvey});
   startTimer(timeSelector, id, io);
 });
 
@@ -61,8 +46,6 @@ app.get('/survey/hideresults/:surveyId', function (req, res){
 app.get('/:adminId/:surveyId', function (req, res){
   res.render('admin-results', {survey: getSurveyId(req)});
 });
-
-
 
 
 io.on('connection', function (socket) {
@@ -102,6 +85,5 @@ io.on('connection', function (socket) {
 function getSurveyId (req) {
   return app.locals.surveys[req.params.surveyId];
 };
-
 
 module.exports = server;
