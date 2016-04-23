@@ -2,16 +2,44 @@ body {
   background-color: grey;
 }
 
-  /* label color */
-   .input-field label {
-     color: #000;
-   }
-   /* label focus color */
-   .input-field input[type=text]:focus + label {
-     color: #000;
-   }
-   /* label underline focus color */
-   .input-field input[type=text]:focus {
-     border-bottom: 1px solid #000;
-     box-shadow: 0 1px 0 0 #000;
-   }
+body, input {
+  font-family: 'Titillium Web', sans-serif;
+}
+
+/* label color */
+ .input-field label {
+   color: #000;
+ }
+ /* label focus color */
+ .input-field input[type=text]:focus + label {
+   color: #000;
+ }
+ /* label underline focus color */
+ .input-field input[type=text]:focus {
+   border-bottom: 1px solid #1A0DAB;
+   box-shadow: 0 1px 0 0 #000;
+ }
+
+a {
+  color: #1A0DAB;
+}
+
+.btn {
+  background-color: #1A0DAB;
+}
+
+#add-option {
+  background-color: #D1D1D1;
+}
+
+#userVoted {
+  color: #1A0DAB;
+}
+
+#inactive-survey {
+  color: #1A0DAB;
+}
+
+table.striped>tbody>tr:nth-child(odd) {
+  background-color: #bdbdbd;
+}

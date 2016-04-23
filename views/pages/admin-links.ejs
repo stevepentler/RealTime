@@ -9,9 +9,9 @@
     <h5>Question: <%= survey.question %></h5>
     <h3 id="inactive-survey"></h3>
 
-    <h3><a href='<%= `/${survey.adminId}/${survey.id}`%>'>Admin Link</a></h3>
-    <h3><a href='<%= `/survey/results/${survey.id}` %>'>Subscriber Link: Public Results</a></h3>
-    <h3><a href='<%= `/survey/hideresults/${survey.id}` %>'>Subscriber Link: Private Results</a></h3>
+    <h4><a href='<%= `/${survey.adminId}/${survey.id}`%>'>Admin Link</a></h4>
+    <h4><a href='<%= `/survey/results/${survey.id}` %>'>Subscriber Link: Public Results</a></h4>
+    <h4><a href='<%= `/survey/hideresults/${survey.id}` %>'>Subscriber Link: Private Results</a></h4>
 
     <% include ../partials/scripts %>
   </body>
