@@ -41,17 +41,6 @@ describe('Server', () => {
         done();
       });
     });
-
-    xit('should have a body with the name of the application', (done) => {
-      var title = app.locals.title;
-
-      this.request.get('/', (error, response) => {
-        if (error) { done(error); }
-        assert(response.body.includes(title),
-               `"${response.body}" does not include "${title}".`);
-        done();
-      });
-    });
   });
 
   describe('POST /admin', () => {
@@ -78,15 +67,6 @@ describe('Server', () => {
       });
     });
 
-    xit('should redirect the user to the admin results page', (done) => {
-      var payload = { survey: surveyData};
 
-      this.request.post('/admin', { form: payload }, (error, response) => {
-        if (error) { done(error); }
-        var newSurveyId = Object.keys(app.locals.surveys)[0];
-        assert.equal(response.headers.location, '/admin/' + newSurveyId);
-        done();
-      });
-    });
   });
 })
