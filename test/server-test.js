@@ -83,7 +83,7 @@ describe('Server', () => {
     });
   });
 
-  describe('GET /survey/results/:id', () => {
+  describe('GET user survey link, SHOW results', () => {
 
     it('should not return 404', (done) => {
       this.request.post('/admin', { form: surveyData}, (error, response) => {
@@ -92,7 +92,7 @@ describe('Server', () => {
         var surveyId = Object.keys(app.locals.surveys)[0];
         var survey = app.locals.surveys[surveyId]
 
-        this.request.get(`/surveys/${surveyId}`, (error, response) => {
+        this.request.get(`/survey/results/${surveyId}`, (error, response) => {
           if (error) { done(error); }
           assert.notEqual(response.statusCode, 404);
           done();
@@ -107,7 +107,7 @@ describe('Server', () => {
         var surveyId = Object.keys(app.locals.surveys)[0];
         var survey = app.locals.surveys[surveyId]
 
-        this.request.get(`/surveys/${surveyId}`, (error, response) => {
+        this.request.get(`/survey/results/${surveyId}`, (error, response) => {
           if (error) { done(error); }
           assert(response.body.includes(survey.question),
           `"${response.body}" does not include "${survey.question}".`);
@@ -117,5 +117,37 @@ describe('Server', () => {
     });
   });
 
+  describe('GET user survey link, HIDE results', () => {
 
+    it('should not return 404', (done) => {
+      this.request.post('/admin', { form: surveyData}, (error, response) => {
+        if (error) { done(error); }
+
+        var surveyId = Object.keys(app.locals.surveys)[0];
+        var survey = app.locals.surveys[surveyId]
+
+        this.request.get(`/survey/hideresults/${surveyId}`, (error, response) => {
+          if (error) { done(error); }
+          assert.notEqual(response.statusCode, 404);
+          done();
+        });
+      });
+    });
+
+    it('should return the proper survey', (done) => {
+      this.request.post('/admin', { form: surveyData}, (error, response) => {
+        if (error) { done(error); }
+
+        var surveyId = Object.keys(app.locals.surveys)[0];
+        var survey = app.locals.surveys[surveyId]
+
+        this.request.get(`/survey/hideresults/${surveyId}`, (error, response) => {
+          if (error) { done(error); }
+          assert(response.body.includes(survey.question),
+          `"${response.body}" does not include "${survey.question}".`);
+          done();
+        });
+      });
+    });
+  });
 })
