@@ -13,8 +13,11 @@
     <h5><a href='<%= `/${survey.adminId}/${survey.id}`%>'>Admin Link</a></h5>
     <h5><a href='<%= `/survey/results/${survey.id}` %>'>Subscriber Link with Public Results</a></h5>
     <h5><a href='<%= `/survey/hideresults/${survey.id}` %>'>Subscriber Link with Private Results</a></h5>
+    <br>
     <button id="close-survey" type="button" class="btn">Close Survey</button>
-
+    <br><br>
+    <span>Clicking close survey will send a text with your results</span>
+    <br>
     <% include ../partials/scripts %>
   </body>
 </html>
