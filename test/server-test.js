@@ -12,7 +12,7 @@ describe('Server', () => {
   }
 
     before((done) => {
-      this.port = 3000;
+      this.port = 9876;
 
       this.server = app.listen(this.port, (err, result) => {
         if (err) { return done(err); }
@@ -20,7 +20,7 @@ describe('Server', () => {
       });
 
       this.request = request.defaults({
-        baseUrl: 'http://localhost:3000/'
+        baseUrl: 'http://localhost:9876/'
       });
     });
 
@@ -43,7 +43,7 @@ describe('Server', () => {
     });
 
     xit('should have a body with the name of the application', (done) => {
-      // var title = app.locals.title;
+      var title = app.locals.title;
 
       this.request.get('/', (error, response) => {
         if (error) { done(error); }
@@ -72,13 +72,13 @@ describe('Server', () => {
       this.request.post('/admin', { form: surveyData }, (error, response) => {
         if (error) { done(error); }
 
-        var surveyCount = Object.keys(surveys).length;
+        var surveyCount = Object.keys(app.locals.surveys).length;
         assert.equal(surveyCount, 1, `Expected 1 survey, found ${surveyCount}`);
         done();
       });
     });
 
-    it('should redirect the user to the admin results page', (done) => {
+    xit('should redirect the user to the admin results page', (done) => {
       var payload = { survey: surveyData};
 
       this.request.post('/admin', { form: payload }, (error, response) => {

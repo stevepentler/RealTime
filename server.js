@@ -57,4 +57,4 @@ function getSurveyId (req) {
   return app.locals.surveys[req.params.surveyId];
 };
 
-module.exports = server;
+module.exports = app;
