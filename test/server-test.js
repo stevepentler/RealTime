@@ -60,13 +60,28 @@ describe('Server', () => {
       app.locals.surveys = {};
       this.request.post('/admin', { form: surveyData }, (error, response) => {
         if (error) { done(error); }
-
         var surveyCount = Object.keys(app.locals.surveys).length;
         assert.equal(surveyCount, 1, `Expected 1 survey, found ${surveyCount}`);
         done();
       });
     });
 
+    it('should return the proper survey for admin', (done) => {
+      this.request.post('/admin', { form: surveyData }, (error, response) => {
+        if (error) { done(error); }
+
+        var surveyId = Object.keys(app.locals.surveys)[0];
+        var survey = app.locals.surveys[surveyId]
+
+        this.request.get(`/surveys/${survey.id}`, (error, response) => {
+          if (error) { done(error); }
+          assert(response.body.includes(survey.question),
+          `"${response.body}" does not include "${survey.question}".`);
+          done();
+        });
+      });
+    });
 
   });
+
 })
